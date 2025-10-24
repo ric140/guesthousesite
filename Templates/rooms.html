@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Our Rooms & Suites{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="relative pt-32 pb-20 bg-gray-900">
+    <div class="absolute inset-0">
+        <img class="w-full h-full object-cover opacity-70" src="{{ url_for('static', filename='images/rooms-header-bg.jpg') }}" alt="Guesthouse Room" style="object-position: center center;">
+        <div class="absolute inset-0 bg-gray-900 opacity-50"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="text-center">
+            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                Our Rooms
+            </h1>
+            <p class="mt-6 max-w-2xl mx-auto text-xl text-gray-300">
+                Designed for comfort and style, each space reflects our modern urban aesthetic.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Room Filter (Placeholder for future functionality) -->
+<div class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex flex-col sm:flex-row justify-between items-center">
+            <div class="mb-4 sm:mb-0">
+                <h2 class="text-lg font-medium text-gray-900">Our Selection</h2>
+            </div>
+            <div class="flex space-x-2 overflow-x-auto pb-2 sm:pb-0">
+                <button class="px-4 py-2 bg-green-600 text-white rounded-md text-sm font-medium">All Rooms</button>
+                <button class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-50">Doubles</button>
+                <button class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-50">Family</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Room List -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    {% for room in rooms %}
+    <div id="{{ room.id }}" class="bg-white rounded-lg shadow-lg overflow-hidden mb-12" data-aos="fade-up">
+        <div class="md:flex {{ loop.cycle('', 'md:flex-row-reverse') }}">
+            <div class="md:w-1/2">
+                <div class="h-80">
+                    <img class="w-full h-full object-cover" src="{{ url_for('static', filename=room.image_url.replace('static/', '')) }}" alt="{{ room.name }}">
+                </div>
+            </div>
+            <div class="md:w-1/2 p-8 flex flex-col">
+                <div class="flex-grow">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ room.name }}</h2>
+                    <p class="text-green-600 text-xl font-semibold mb-4">From ${{ "%.2f"|format(room.price_per_night) }}/night</p>
+                    <p class="text-gray-600 mb-6">
+                        {{ room.description }}
+                    </p>
+                    <div class="mb-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Room Amenities</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            {% for amenity in room.amenities %}
+                            <div class="flex items-center">
+                                <i data-feather="check-circle" class="h-5 w-5 text-green-600"></i>
+                                <span class="ml-3 text-gray-600">{{ amenity }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 flex-shrink-0 flex space-x-4">
+                    <a href="{{ guesthouse.booking_url }}" target="_blank" class="flex-1 bg-green-600 hover:bg-green-700 text-white text-center py-3 px-6 rounded-md font-medium">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- CTA Section -->
+<div class="bg-gray-50">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <span class="block">Ready to book your stay?</span>
+            <span class="block text-green-600">We're here to help.</span>
+        </h2>
+        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+            <div class="inline-flex rounded-md shadow">
+                <a href="{{ guesthouse.booking_url }}" target="_blank" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700">Book Now</a>
+            </div>
+            <div class="ml-3 inline-flex rounded-md shadow">
+                <a href="{{ url_for('contact') }}" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-green-600 bg-white hover:bg-gray-50">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

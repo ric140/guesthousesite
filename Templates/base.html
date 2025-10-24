@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} | {{ guesthouse.name }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+  tailwind.config = {
+    plugins: [
+      require('@tailwindcss/aspect-ratio'),
+    ],
+  }
+</script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(245,245,245,0.7) 100%); }
+        .font-brand { font-family: 'Playfair Display', serif; }
+        .text-effect-glow { text-shadow: 0 0 8px rgba(0, 0, 0, 0.7); }
+        .navbar-glass { background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        .navbar-solid { background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); }
+        .nav-link-pill { position: relative; z-index: 1; }
+        .nav-link-pill::before { content: ''; position: absolute; top: -0.25rem; bottom: -0.25rem; left: -0.75rem; right: -0.75rem; background-color: #15803d; border-radius: 9999px; opacity: 0; transform: scale(0.8); transition: all 0.2s ease-in-out; z-index: -1; }
+        .nav-link-pill:hover::before { opacity: 1; transform: scale(1); }
+        .nav-link-pill:hover a { color: white !important; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header id="main-header" class="fixed w-full top-0 z-50 navbar-glass transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a id="brand-logo" href="{{ url_for('home') }}" class="font-brand text-3xl font-bold transition-colors duration-300 text-effect-glow">{{ guesthouse.name }}</a>
+                </div>
+                <div class="hidden md:block">
+                    <div id="nav-links" class="ml-10 flex items-baseline space-x-4">
+                        <div class="nav-link-pill"><a href="{{ url_for('home') }}" class="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Home</a></div>
+                        <div class="nav-link-pill"><a href="{{ url_for('rooms') }}" class="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Rooms</a></div>
+                        <!-- <div class="nav-link-pill"><a href="{{ url_for('experiences') }}" class="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Experiences</a></div> --> <!-- REMOVED -->
+                        <div class="nav-link-pill"><a href="{{ url_for('about') }}" class="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">About</a></div>
+                        <div class="nav-link-pill"><a href="{{ url_for('contact') }}" class="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Contact</a></div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                     <a href="{{ guesthouse.booking_url }}" target="_blank" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-700 hover:bg-green-800">Book Now</a>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="bg-gray-800 bg-opacity-25 inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-opacity-50 focus:outline-none">
+                        <i data-feather="menu" class="block h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-40">
+        <div id="mobile-menu-overlay" class="absolute inset-0 bg-gray-900 opacity-75"></div>
+        <div id="mobile-menu-panel" class="relative flex-1 flex flex-col max-w-xs w-full bg-white transform -translate-x-full transition-transform ease-in-out duration-300">
+            <div class="absolute top-0 right-0 -mr-12 pt-2">
+                <button type="button" id="mobile-menu-close-button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none">
+                    <i data-feather="x" class="h-6 w-6 text-white"></i>
+                </button>
+            </div>
+            <div class="pt-5 pb-6 px-5">
+                <nav class="mt-6">
+                    <div class="space-y-1">
+                        <a href="{{ url_for('home') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Home</a>
+                        <a href="{{ url_for('rooms') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Rooms</a>
+                        <!-- <a href="{{ url_for('experiences') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Experiences</a> --> <!-- REMOVED -->
+                        <a href="{{ url_for('about') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">About</a>
+                        <a href="{{ url_for('contact') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contact</a>
+                    </div>
+                    <div class="mt-6">
+                        <a href="{{ guesthouse.booking_url }}" target="_blank" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-700 hover:bg-green-800">Book Now</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+                <div>
+                    <h3 class="text-white text-lg font-semibold">{{ guesthouse.name }}</h3>
+                    <p class="mt-4 text-gray-400 text-sm">
+                        Modern comfort meets urban sophistication in the heart of Kampot.
+                    </p>
+                    <div class="mt-4 flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="twitter"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-semibold">Quick Links</h3>
+                    <div class="mt-4 space-y-2">
+                        <a href="{{ url_for('home') }}" class="text-gray-400 hover:text-white block">Home</a>
+                        <a href="{{ url_for('rooms') }}" class="text-gray-400 hover:text-white block">Rooms</a>
+                        <!-- <a href="{{ url_for('experiences') }}" class="text-gray-400 hover:text-white block">Experiences</a> --> <!-- REMOVED -->
+                        <a href="{{ url_for('about') }}" class="text-gray-400 hover:text-white block">About Us</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-semibold">Information</h3>
+                    <div class="mt-4 space-y-2">
+                        <a href="{{ url_for('contact') }}" class="text-gray-400 hover:text-white block">Contact</a>
+                        <a href="#" class="text-gray-400 hover:text-white block">Terms & Conditions</a>
+                        <a href="#" class="text-gray-400 hover:text-white block">Privacy Policy</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-semibold">Contact</h3>
+                    <div class="mt-4 space-y-2 text-gray-400">
+                        <p class="flex items-start"><i data-feather="map-pin" class="mr-2 mt-1"></i><span>{{ guesthouse.address }}</span></p>
+                        <p class="flex items-center"><i data-feather="phone" class="mr-2"></i><span>{{ guesthouse.phone }}</span></p>
+                        <p class="flex items-center"><i data-feather="mail" class="mr-2"></i><span>{{ guesthouse.email }}</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-gray-400 text-sm text-center">
+                    &copy; 2025 {{ guesthouse.name }}. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
+        feather.replace();
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

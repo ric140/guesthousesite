@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="relative pt-32 pb-20 bg-gray-800">
+    <div class="absolute inset-0">
+        <img class="w-full h-full object-cover opacity-40" src="{{ url_for('static', filename='images/about-header-bg.jpg') }}" alt="Welcoming guesthouse entrance">
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Our Story</h1>
+        <p class="mt-6 max-w-3xl text-xl text-gray-300">Authentic Family-Run Hospitality in the Heart of Kampot.</p>
+    </div>
+</div>
+
+<!-- Main Content Section -->
+<div class="bg-white overflow-hidden py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:grid lg:grid-cols-5 lg:gap-x-12">
+            
+            <!-- Left Column: Image Gallery (NOW FULLY CORRECTED) -->
+            <div class="lg:col-span-2" data-aos="fade-right">
+                <div class="space-y-4">
+                    <!-- Main Portrait (3:4 Ratio) -->
+                    <div class="rounded-lg shadow-lg overflow-hidden aspect-w-3 aspect-h-4">
+                        <img class="w-full h-full object-cover" src="{{ url_for('static', filename='images/owners-portrait.jpg') }}" alt="Keo and his wife, owners of Good Day Kampot Guesthouse">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Secondary Image 1 (1:1 Square Ratio) -->
+                        <div class="rounded-lg shadow-lg overflow-hidden aspect-w-1 aspect-h-1">
+                            <img class="w-full h-full object-cover" src="{{ url_for('static', filename='images/guesthouse-exterior.jpg') }}" alt="Guesthouse Staff">
+                        </div>
+                        <!-- Secondary Image 2 (1:1 Square Ratio) -->
+                        <div class="rounded-lg shadow-lg overflow-hidden aspect-w-1 aspect-h-1">
+                            <img class="w-full h-full object-cover" src="{{ url_for('static', filename='images/partner-andrew.jpg') }}" alt="Andrew, digital marketing partner">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: The Story -->
+            <div class="lg:col-span-3 mt-12 lg:mt-0" data-aos="fade-left" data-aos-delay="100">
+                <h2 class="text-base text-green-700 font-semibold tracking-wide uppercase">Welcome to Good Day Kampot</h2>
+                <p class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    A Warm, Family-Run Guesthouse in the Vibrant Town of Kampot, Cambodia.
+                </p>
+                <div class="mt-6 text-gray-600 space-y-6 text-lg">
+                    <p>Since August 2025, Keo and his wife have proudly owned and managed the guesthouse, bringing their deep local roots and passion for genuine Cambodian hospitality to every guest’s experience. As a true family business, Good Day Kampot offers more than just accommodation—it provides a welcoming home base where travelers can feel supported, inspired, and connected to the local community.</p>
+                    <p>With extensive experience in business management and hospitality, Keo and his wife personally oversee daily operations, ensuring that every detail—from comfortable rooms to personalized local recommendations—is thoughtfully handled. Their hands-on approach guarantees authentic service and seamless stays, making Good Day Kampot a standout choice for travelers seeking a family-friendly, locally owned guesthouse in Kampot.</p>
+                    <p>Supporting this family-driven vision, Andrew leads the digital marketing and technology initiatives, leveraging advanced online strategies to enhance the guesthouse’s visibility and continuously improve the guest experience. This combination of local expertise and innovative marketing ensures Good Day Kampot remains a top-rated guesthouse in Kampot, known for its authentic atmosphere, exceptional value, and personalized service.</p>
+                    <p>Guests at Good Day Kampot enjoy not only comfortable accommodations but also access to valuable services such as motorbike rentals, travel agency support, and visa assistance—making it the ideal home base for exploring Kampot’s natural beauty and cultural attractions.</p>
+                    <p class="font-semibold text-gray-900">Discover the genuine warmth and authentic charm of a family-run guesthouse in Kampot. We invite you to experience hospitality that feels like home, with the added convenience and expertise of a dedicated local team.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="bg-gray-50">
+    <div class="max-w-4xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            <span class="block">Ready to Experience Our Hospitality?</span>
+        </h2>
+        <p class="mt-4 text-lg leading-6 text-gray-600">We look forward to welcoming you to the Good Day Kampot family.</p>
+        <a href="{{ guesthouse.booking_url }}" target="_blank" class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-700 hover:bg-green-800 sm:w-auto">
+            Book Your Stay
+        </a>
+    </div>
+</div>
+{% endblock %}```
+
