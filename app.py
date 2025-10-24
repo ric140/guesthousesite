@@ -1,6 +1,10 @@
+# --- START OF CORRECTED FILE app.py ---
+
 from flask import Flask, render_template, request, redirect, url_for
+from flask_frozen import Freezer
 
 app = Flask(__name__)
+freezer = Freezer(app)
 
 # --- MOCK DATABASE (Room Information Updated) ---
 MOCK_DATA = {
@@ -79,17 +83,8 @@ def booking_step1():
     # This route now redirects there, instead of to a local template.
     return redirect(MOCK_DATA['guesthouse_info']['booking_url'])
 
-# --- THE FOLLOWING TWO ROUTES WERE REMOVED ---
-# These were placeholders for the on-site booking flow which we have deferred until after the MVP launch.
-# Removing them cleans up our code and aligns it with our current strategy.
-#
-# @app.route('/booking/details', methods=['POST'])
-# def booking_step2():
-#     # ... old logic ...
-#
-# @app.route('/booking/confirm', methods=['POST'])
-# def booking_confirmation():
-#     # ... old logic ...
-
+# This is the single, correct block for building the site.
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    freezer.freeze()
+
+# --- END OF CORRECTED FILE app.py ---
